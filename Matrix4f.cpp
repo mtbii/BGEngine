@@ -1,11 +1,11 @@
-#include "Matrix.h"
+#include "Matrix4f.h"
 using namespace Engine::Math;
 
-Matrix::Matrix()
+Matrix4f::Matrix4f()
 {
 }
 
 
-Matrix::~Matrix()
+Matrix4f::~Matrix4f()
 {
 }
