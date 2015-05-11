@@ -1,13 +1,14 @@
 #pragma once
+#include <math.h>
 
 namespace Engine
 {
    namespace Math
    {
-#include <math.h>
       class Vector3f
       {
       public:
+         Vector3f();
          Vector3f(float x, float y, float z);
          ~Vector3f();
 
@@ -32,7 +33,7 @@ namespace Engine
 
          friend Vector3f operator/(const Vector3f& vec1, const Vector3f& vec2);
          friend Vector3f operator/(const Vector3f& vec2, float scale);
-         
+
          void setX(float x);
          float getX();
          void setY(float y);

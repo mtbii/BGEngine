@@ -1,6 +1,13 @@
 #include "Vector2f.h"
 using namespace Engine::Math;
 
+
+Vector2f::Vector2f()
+{
+   this->x = 0;
+   this->y = 0;
+}
+
 Vector2f::Vector2f(float x, float y)
 {
    this->x = x;
@@ -56,9 +63,14 @@ void Vector2f::setY(float y){
 
 }
 
+
 Vector2f Engine::Math::operator+(const Vector2f& vec1, const Vector2f& vec2) {
    Vector2f a(vec1.x + vec2.x, vec1.y + vec2.y);
    return a;
+}
+
+Vector2f Engine::Math::operator+(const Vector2f& vec1, float offset){
+   return Vector2f(vec1.x + offset, vec1.y + offset);
 }
 
 Vector2f Engine::Math::operator-(const Vector2f& vec1){
@@ -69,4 +81,28 @@ Vector2f Engine::Math::operator-(const Vector2f& vec1){
 Vector2f Engine::Math::operator-(const Vector2f& vec1, const Vector2f& vec2){
    Vector2f a(vec1.x - vec2.x, vec1.y - vec2.y);
    return a;
+}
+
+Vector2f Engine::Math::operator-(const Vector2f& vec1, float offset){
+   return Vector2f(vec1.x - offset, vec1.y - offset);
+}
+
+Vector2f Engine::Math::operator*(const Vector2f& vec1, const Vector2f& vec2){
+   return Vector2f(vec1.x*vec2.x, vec1.y*vec2.y);
+}
+
+Vector2f Engine::Math::operator*(const Vector2f vec1, float scale){
+   return scale*vec1; //Use other overload here
+}
+
+Vector2f Engine::Math::operator*(float scale, const Vector2f vec1){
+   return Vector2f(vec1.x*scale, vec1.y*scale);
+}
+
+Vector2f Engine::Math::operator/(const Vector2f& vec1, const Vector2f& vec2){
+   return Vector2f(vec1.x / vec2.x, vec1.y / vec2.y);
+}
+
+Vector2f Engine::Math::operator/(const Vector2f& vec1, float scale){
+   return vec1 * (1.0f / scale);
 }

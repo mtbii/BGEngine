@@ -3,7 +3,7 @@
 /***
 Returns current time in milliseconds
 ***/
-long Time::getTime(){
+long Time::GetTime(){
    return SDL_GetTicks();
 }
 
@@ -11,7 +11,7 @@ long Time::getTime(){
 Returns the time difference between the current time
 and the last time that delta was called.
 ***/
-long Time::delta(){
+long Time::Delta(){
    static long lastTime = SDL_GetTicks();
    long currentTime = SDL_GetTicks();
    long deltaTime = currentTime - lastTime;

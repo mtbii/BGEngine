@@ -7,56 +7,50 @@
     <Filter Include="Utilities">
       <UniqueIdentifier>{a309b508-9012-4d42-8dda-f3b1569df490}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Math">
-      <UniqueIdentifier>{4fb5ffec-f17d-48da-a494-5368de2d2f6b}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Main.h" />
     <ClInclude Include="Time.h">
       <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Log.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Quaternion.h">
-      <Filter>Core\Math</Filter>
+    <ClInclude Include="RenderUtils.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2f.h">
-      <Filter>Core\Math</Filter>
+    <ClInclude Include="Vertex.h">
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Vector3f.h">
-      <Filter>Core\Math</Filter>
+    <ClInclude Include="Mesh.h">
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Matrix4f.h">
-      <Filter>Core\Math</Filter>
+    <ClInclude Include="Math3d.h">
+      <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Main.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Time.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
     <ClCompile Include="Log.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Quaternion.cpp">
-      <Filter>Core\Math</Filter>
+    <ClCompile Include="RenderUtils.cpp">
+      <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Vector2f.cpp">
-      <Filter>Core\Math</Filter>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Vector3f.cpp">
-      <Filter>Core\Math</Filter>
+    <ClCompile Include="Math3d.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Matrix4f.cpp">
-      <Filter>Core\Math</Filter>
-    </ClCompile>
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
 </Project>

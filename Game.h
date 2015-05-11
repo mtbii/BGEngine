@@ -1,15 +1,16 @@
 #pragma once
-
+#include <glew.h>
 #include <SDL.h>
+#include <SDL_opengl.h>
 #include <math.h>
 #include "Log.h"
 #include "Time.h"
+#include "RenderUtils.h"
+#include "Mesh.h"
 
-namespace Engine
-{
    class Game
    {
-   private:
+   protected:
       bool _isRunning;
 
       string _title;
@@ -17,23 +18,23 @@ namespace Engine
       int _height;
 
       SDL_Window* _window;
-      SDL_Surface* _screen;
+      SDL_GLContext _glContext;
       SDL_Renderer* _renderer;
+      SDL_Surface* _screen;
 
       const int TARGET_FPS = 200;
-      int getFPS();
-      void printFPS();
+      int GetFPS();
+      void PrintFPS();
 
    public:
       Game();
       Game(string windowTitle, int width, int height);
       ~Game();
 
-      int execute();
-      bool init();
-      void onEvent(SDL_Event* event);
-      void update();
-      void render();
-      void cleanup();
+      virtual int Execute();
+      virtual bool Init();
+      virtual void OnEvent(SDL_Event* event);
+      virtual void Update();
+      virtual void Render();
+      virtual void CleanUp();
    };
-}

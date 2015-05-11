@@ -1,13 +1,19 @@
 #include "Vector3f.h"
 using namespace Engine::Math;
 
+Vector3f::Vector3f()
+{
+   this->x = 0;
+   this->y = 0;
+   this->z = 0;
+}
+
 Vector3f::Vector3f(float x, float y, float z)
 {
    this->x = x;
    this->y = y;
    this->z = z;
 }
-
 
 Vector3f::~Vector3f()
 {
@@ -32,6 +38,7 @@ Vector3f Vector3f::normalize(){
    float length = this->length();
    x /= length;
    y /= length;
+   z /= length;
    return *this;
 }
 
@@ -67,7 +74,7 @@ void Vector3f::setY(float y){
 }
 
 float Vector3f::getZ(){
-   return y;
+   return z;
 }
 
 void Vector3f::setZ(float z){
@@ -115,5 +122,5 @@ Vector3f Engine::Math::operator/(const Vector3f& vec1, const Vector3f& vec2){
 }
 
 Vector3f Engine::Math::operator/(const Vector3f& vec1, float scale){
-   return Vector3f(vec1.x / scale, vec1.y / scale, vec1.z / scale);
+   return vec1 * (1.0f / scale);
 }

@@ -1,10 +1,8 @@
 #include "Game.h"
-using namespace Engine;
 
 Game::Game() :
 _isRunning(false),
 _window(nullptr),
-_screen(nullptr),
 _renderer(nullptr),
 _title("3D Engine"),
 _height(480),
@@ -13,6 +11,7 @@ _width(640)
 }
 
 Game::Game(string title, int width, int height){
+   Game();
    this->_title = title;
    this->_height = height;
    this->_width = width;
@@ -21,33 +20,53 @@ Game::Game(string title, int width, int height){
 Game::~Game()
 {
    _window = nullptr;
-   _screen = nullptr;
    _renderer = nullptr;
 }
 
-bool Game::init(){
+bool Game::Init(){
    if (SDL_Init(SDL_INIT_EVERYTHING) < 0){
       error("Cannot initialize SDL!");
       return false;
    }
 
-   if ((_window = SDL_CreateWindow(_title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _width, _height, SDL_WINDOW_RESIZABLE)) == nullptr)
+   //SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+   //SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+   //SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+
+   _window = SDL_CreateWindow(_title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _width, _height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+   if (_window == nullptr)
    {
       error("Cannot create SDL window!");
       return false;
    }
 
-   if ((_screen = SDL_GetWindowSurface(_window)) == nullptr)
+   _glContext = SDL_GL_CreateContext(_window);
+   if (_glContext == nullptr){
+      error("Cannot create OpenGL context!");
+      return false;
+   }
+
+   _screen = SDL_GetWindowSurface(_window);
+   if (_screen == nullptr)
    {
       error("Cannot get window surface!");
       return false;
    }
 
+   glewExperimental = GL_TRUE;
+   GLenum errorCode = glewInit();
+   if (errorCode != GLEW_OK){
+      error("Error initializing GLEW");
+   }
+
+   RenderUtils::InitGraphics();
+
+   SDL_GL_SetSwapInterval(1);
    return true;
 }
 
-int Game::execute(){
-   if (init() == false){
+int Game::Execute(){
+   if (this->Init() == false){
       return -1;
    }
 
@@ -56,68 +75,69 @@ int Game::execute(){
    bool mustRender = false;
    _isRunning = true;
    SDL_Event event;
-   Time::delta();
+   Time::Delta();
 
    while (_isRunning){
       while (SDL_PollEvent(&event)){
-         onEvent(&event);
+         OnEvent(&event);
       }
 
       while (unprocessedTime > frameTime)
       {
-         update();
+         Update();
          unprocessedTime -= frameTime;
          mustRender = true;
       }
 
       if (mustRender)
       {
-         render();
+         Render();
          mustRender = false;
 
 #if DEBUG
-         printFPS();
+         PrintFPS();
 #endif
       }
       else
       {
-         SDL_Delay(2);
+         SDL_Delay(1);
       }
 
-      unprocessedTime += Time::delta();
+      unprocessedTime += Time::Delta();
    }
 
-   cleanup();
+   CleanUp();
    return 0;
 }
 
-void Game::update(){
+void Game::Update(){
 
 }
 
-void Game::render(){
-   SDL_FillRect(_screen, nullptr, SDL_MapRGB(_screen->format, 0xFF, 0xFF, 0xFF));
-   SDL_UpdateWindowSurface(_window);
+void Game::Render(){
+   SDL_GL_SwapWindow(_window);
+   RenderUtils::ClearScreen();
 }
 
-void Game::onEvent(SDL_Event* event){
+void Game::OnEvent(SDL_Event* event){
    if (event->type == SDL_QUIT){
       _isRunning = false;
    }
 }
 
-void Game::cleanup(){
+void Game::CleanUp(){
+   SDL_GL_DeleteContext(_glContext);
    SDL_DestroyWindow(_window);
    SDL_Quit();
 }
 
-int Game::getFPS(){
+int Game::GetFPS(){
    static const int FRAME_LIMIT = 8;
    static long frameTimes[FRAME_LIMIT];
    static int currentIndex = 0;
-   static int lastTime = Time::getTime();
+   static int lastTime = Time::GetTime();
 
-   long currentTime = Time::getTime();
+   long currentTime = Time::GetTime();
    long delta = currentTime - lastTime;
    if (delta == 0)
    {
@@ -143,7 +163,7 @@ int Game::getFPS(){
    return TARGET_FPS;
 }
 
-void Game::printFPS(){
-   int time = getFPS();
+void Game::PrintFPS(){
+   int time = GetFPS();
    cout << time << "FPS" << endl;
 }

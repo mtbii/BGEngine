@@ -5,7 +5,7 @@ void error(const char* msg, ...){
    sstream << "ERROR: " << msg << "\n";
    va_list list;
    va_start(list, msg);
-   printf(sstream.str().c_str(), list);
+   vfprintf(stderr, sstream.str().c_str(), list);
    va_end(list);
 }
 
@@ -14,7 +14,7 @@ void warning(const char* msg, ...){
    sstream << "WARNING: " << msg << "\n";
    va_list list;
    va_start(list, msg);
-   vprintf(sstream.str().c_str(), list);
+   vfprintf(stderr, sstream.str().c_str(), list);
    va_end(list);
 }
 

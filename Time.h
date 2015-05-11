@@ -5,7 +5,7 @@
 class Time
 {
 public:
-   static long getTime();
-   static long delta();
+   static long GetTime();
+   static long Delta();
 };
 
