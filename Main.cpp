@@ -3,17 +3,13 @@
 void TestGame::Render(){
    Game::Render();
 
+   shader.Bind();
    testMesh.Draw();
+   shader.Unbind();
 }
 
 bool TestGame::Init(){
    bool status = Game::Init();
-
-   GLfloat points[] = {
-      0.0f, 0.5f, 0.0f,
-      0.5f, -0.5f, 0.0f,
-      -0.5f, -0.5f, 0.0f
-   };
 
    vector<Vertex> vertices;
 
@@ -30,10 +26,10 @@ bool TestGame::Init(){
    v2.position.x = 0.5f;
    v2.position.y = -0.5f;
    v2.position.z = 0.5f;
-   v1.color.a = 255;
-   v1.color.r = 0;
-   v1.color.g = 255;
-   v1.color.b = 0;
+   v2.color.a = 255;
+   v2.color.r = 0;
+   v2.color.g = 255;
+   v2.color.b = 0;
 
    Vertex v3;
    v3.position.x = -0.5f;
@@ -51,6 +47,10 @@ bool TestGame::Init(){
    testMesh.Init();
    testMesh.SetVertices(vertices);
 
+   shader.Compile("basic.vert", "basic.frag");
+   shader.AddAttribute("vertexPosition");
+   shader.AddAttribute("vertexColor");
+   shader.Link();
    return status;
 }
 

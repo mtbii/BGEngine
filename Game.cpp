@@ -132,7 +132,7 @@ void Game::CleanUp(){
 }
 
 int Game::GetFPS(){
-   static const int FRAME_LIMIT = 8;
+   static const int FRAME_LIMIT = 32;
    static long frameTimes[FRAME_LIMIT];
    static int currentIndex = 0;
    static int lastTime = Time::GetTime();

@@ -31,6 +31,15 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Main.h" />
+    <ClInclude Include="Utilities.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="IOUtils.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="GLSLProgram.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -52,5 +61,11 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="IOUtils.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="GLSLProgram.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
