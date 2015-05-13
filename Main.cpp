@@ -3,9 +3,7 @@
 void TestGame::Render(){
    Game::Render();
 
-   shader.Bind();
-   testMesh.Draw();
-   shader.Unbind();
+   testEntity->Draw();
 }
 
 bool TestGame::Init(){
@@ -44,17 +42,42 @@ bool TestGame::Init(){
    vertices.push_back(v2);
    vertices.push_back(v3);
 
+   Model3D testMesh;
    testMesh.Init();
    testMesh.SetVertices(vertices);
 
-   shader.Compile("basic.vert", "basic.frag");
-   shader.AddAttribute("vertexPosition");
-   shader.AddAttribute("vertexColor");
-   shader.Link();
+   Transform transform(glm::vec3(0.0f), glm::quat(glm::vec3(0.0f)), glm::vec3(1.0f));
+
+   testEntity = new Entity<Model3D>();
+   testEntity->geometry = testMesh;
+   testEntity->transform = transform;
+
    return status;
+}
+
+void TestGame::Update(){
+   Game::Update();
+
+}
+
+void TestGame::OnEvent(SDL_Event* event)
+{
+   Game::OnEvent(event);
+
+   if (Input::IsKeyDown(SDLK_ESCAPE))
+   {
+      RequestQuit();
+   }
+}
+
+void TestGame::CleanUp()
+{
+   Game::CleanUp();
+   delete testEntity;
 }
 
 int main(int argc, char* argv[]){
    TestGame game;
-   return game.Execute();
+   int status = game.Execute();
+   return status;
 }

@@ -1,37 +1,37 @@
-#include "Mesh.h"
+#include "Model3D.h"
 
-Mesh::Mesh() :
+Model3D::Model3D() :
 vboId(0),
 size(0)
 {
 }
 
-Mesh::~Mesh(){
+Model3D::~Model3D(){
    glDeleteBuffers(1, &vboId);
 }
 
-void Mesh::Init(){
+void Model3D::Init(){
    if (vboId == 0)
    {
       glGenBuffers(1, &vboId);
    }
 }
 
-void Mesh::SetVertices(std::vector<Vertex> vertices){
-   size = vertices.size() * Vertex::POSITION_SIZE;
+void Model3D::SetVertices(std::vector<Vertex> vertices){
+   size = vertices.size();
    glBindBuffer(GL_ARRAY_BUFFER, vboId);
    glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void Mesh::SetVertices(int count, float vertices[]){
+void Model3D::SetVertices(int count, float vertices[]){
    this->size = count;
    glBindBuffer(GL_ARRAY_BUFFER, vboId);
    glBufferData(GL_ARRAY_BUFFER, count*sizeof(float), vertices, GL_STATIC_DRAW);
    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void Mesh::Draw(){
+void Model3D::Draw(){
 
    glEnableVertexAttribArray(0);
    glEnableVertexAttribArray(1);
@@ -43,7 +43,7 @@ void Mesh::Draw(){
    //Color attribute pointer
    glVertexAttribPointer(1, Vertex::COLOR_SIZE, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
 
-   glDrawArrays(GL_TRIANGLES, 0, 3);
+   glDrawArrays(GL_TRIANGLES, 0, size);
 
    glDisableVertexAttribArray(1);
    glDisableVertexAttribArray(0);

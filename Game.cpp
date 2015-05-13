@@ -3,7 +3,6 @@
 Game::Game() :
 _isRunning(false),
 _window(nullptr),
-_renderer(nullptr),
 _title("3D Engine"),
 _height(480),
 _width(640)
@@ -20,7 +19,6 @@ Game::Game(string title, int width, int height){
 Game::~Game()
 {
    _window = nullptr;
-   _renderer = nullptr;
 }
 
 bool Game::Init(){
@@ -28,10 +26,6 @@ bool Game::Init(){
       error("Cannot initialize SDL!");
       return false;
    }
-
-   //SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-   //SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-   //SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 
    _window = SDL_CreateWindow(_title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _width, _height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
    if (_window == nullptr)
@@ -45,14 +39,7 @@ bool Game::Init(){
       error("Cannot create OpenGL context!");
       return false;
    }
-
-   _screen = SDL_GetWindowSurface(_window);
-   if (_screen == nullptr)
-   {
-      error("Cannot get window surface!");
-      return false;
-   }
-
+   
    glewExperimental = GL_TRUE;
    GLenum errorCode = glewInit();
    if (errorCode != GLEW_OK){
@@ -71,7 +58,7 @@ int Game::Execute(){
    }
 
    int unprocessedTime = 0;
-   const int frameTime = round(1000.0 / TARGET_FPS);
+   const int frameTime = (int)round(1000.0 / TARGET_FPS);
    bool mustRender = false;
    _isRunning = true;
    SDL_Event event;
@@ -120,9 +107,15 @@ void Game::Render(){
 }
 
 void Game::OnEvent(SDL_Event* event){
+   Input::Update(event);
    if (event->type == SDL_QUIT){
-      _isRunning = false;
+      RequestQuit();
    }
+}
+
+void Game::RequestQuit()
+{
+   _isRunning = false;
 }
 
 void Game::CleanUp(){

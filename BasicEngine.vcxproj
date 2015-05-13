@@ -40,7 +40,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LibraryPath>C:\Projects\Games\Dependencies\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Projects\Games\Dependencies\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Projects\Games\Dependencies\glm;C:\Projects\Games\Dependencies\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>C:\Projects\Games\Dependencies\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
@@ -79,28 +79,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="IOUtils.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GLSLProgram.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Main.h" />
-    <ClInclude Include="Math3d.h" />
-    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Model3D.h" />
     <ClInclude Include="RenderUtils.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="IOUtils.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GLSLProgram.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Math3d.cpp" />
-    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Model3D.cpp" />
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
