@@ -1,6 +1,5 @@
 #pragma once
 #include "glew.h"
-#include "Vector3f.h"
 
 struct Point{
    Point() : x(0), y(0){};

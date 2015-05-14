@@ -53,7 +53,7 @@ int Game::Execute(){
       }
       else
       {
-         SDL_Delay(1);
+         //SDL_Delay(1);
       }
 
       unprocessedTime += Time::Delta();
@@ -73,7 +73,7 @@ void Game::Render(){
 }
 
 void Game::OnEvent(SDL_Event* event){
-   //Input::Update(event);
+   Input::Update(event);
    if (event->type == SDL_QUIT){
       RequestQuit();
    }

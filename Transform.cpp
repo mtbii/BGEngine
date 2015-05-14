@@ -81,6 +81,7 @@ void Transform::SetRotation(const glm::mat4& rotMat)
 void Transform::SetRotation(const glm::vec3& rotation)
 {
    this->rotation = glm::quat(rotation);
+   this->rotationMatrix = glm::mat4_cast(this->rotation);
 }
 
 void Transform::SetRotation(const float& x, const float& y, const float& z)

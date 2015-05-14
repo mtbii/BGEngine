@@ -79,6 +79,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Cube.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="IOUtils.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GLSLProgram.h" />
@@ -87,11 +90,14 @@
     <ClInclude Include="Model3D.h" />
     <ClInclude Include="RenderUtils.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="IOUtils.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GLSLProgram.cpp" />
@@ -100,7 +106,12 @@
     <ClCompile Include="Model3D.cpp" />
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="basic.frag" />
+    <None Include="basic.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,9 +3,7 @@
 void TestGame::Render(){
    Game::Render();
 
-   //testEntity->Draw();
-
-   model.Draw();
+   testEntity->Draw();
 }
 
 bool TestGame::Init(){
@@ -25,7 +23,7 @@ bool TestGame::Init(){
    Vertex v2;
    v2.position.x = 0.5f;
    v2.position.y = -0.5f;
-   v2.position.z = 0.5f;
+   v2.position.z = 0.0f;
    v2.color.a = 255;
    v2.color.r = 0;
    v2.color.g = 255;
@@ -44,43 +42,41 @@ bool TestGame::Init(){
    vertices.push_back(v2);
    vertices.push_back(v3);
 
-   Model3D testMesh;
-   testMesh.Init();
-   testMesh.SetVertices(vertices);
-   model = testMesh;
+   Model3D* testMesh = new Model3D();
+   testMesh->Init();
+   testMesh->SetVertices(vertices);
 
-   //Transform transform(glm::vec3(0.0f), glm::quat(glm::vec3(0.0f)), glm::vec3(1.0f));
+   Transform* transform = new Transform(glm::vec3(0), glm::quat(glm::vec3(0.0f)), glm::vec3(1.0f));
 
-   /*testEntity = new Entity<Model3D>();
+   testEntity = new Entity<Model3D>();
    testEntity->geometry = testMesh;
    testEntity->transform = transform;
-   */
+
    return status;
 }
 
 void TestGame::Update(){
    Game::Update();
-
 }
 
 void TestGame::OnEvent(SDL_Event* event)
 {
    Game::OnEvent(event);
 
-   //if (Input::IsKeyDown(SDLK_ESCAPE))
-   //{
-   //   RequestQuit();
-   //}
+   if (Input::IsKeyDown(SDLK_ESCAPE))
+   {
+      RequestQuit();
+   }
 }
 
 void TestGame::CleanUp()
 {
    Game::CleanUp();
-   //delete testEntity;
+   delete testEntity;
 }
 
 int main(int argc, char* argv[]){
-   Window window("Test Game Engine", 800, 600);
+   Window window("Test Game Engine", 600, 600);
    TestGame game(window);
    int status = game.Execute();
    return status;

@@ -1,12 +1,12 @@
 #pragma once
 #include "Game.h"
 #include "Model3D.h"
+#include "Entity.h"
 
 class TestGame : public Game
 {
 private:
-   //Entity<Model3D>* testEntity;
-   Model3D model;
+   Entity<Model3D>* testEntity;
 
 public:
    TestGame(Window& window) : Game(window){};

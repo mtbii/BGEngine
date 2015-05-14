@@ -7,7 +7,7 @@
 #include "Time.h"
 #include "RenderUtils.h"
 #include "Model3D.h"
-//#include "Input.h"
+#include "Input.h"
 #include "Window.h"
 
 class Game
