@@ -6,8 +6,8 @@
 #include <vector>
 #include <map>
 #include <glm/glm.hpp>
-#include "Log.h"
-#include "IOUtils.h"
+#include "../../../Utilities/Log.h"
+#include "../../../Utilities/IOUtils.h"
 
 class GLSLProgram
 {

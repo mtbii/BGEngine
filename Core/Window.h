@@ -2,7 +2,7 @@
 
 #include<glew.h>
 #include<string>
-#include "Utilities.h"
+#include "../Utilities/Utilities.h"
 #include<SDL.h>
 #include<SDL_opengl.h>
 

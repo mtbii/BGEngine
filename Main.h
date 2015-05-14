@@ -1,7 +1,7 @@
 #pragma once
-#include "Game.h"
-#include "Model3D.h"
-#include "Entity.h"
+#include "Core/Game.h"
+#include "Core/Scene/GL/Model3D.h"
+#include "Core/Scene/Entity.h"
 
 class TestGame : public Game
 {

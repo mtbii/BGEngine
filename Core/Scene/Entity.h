@@ -3,9 +3,9 @@
 #include<glew.h>
 #include<glm/glm.hpp>
 #include<type_traits>
-#include "Vertex.h"
-#include "Model3D.h"
-#include "GLSLProgram.h"
+#include "GL/Vertex.h"
+#include "GL/Model3D.h"
+#include "GL/GLSLProgram.h"
 #include "Transform.h"
 
 template <class T>
@@ -46,22 +46,22 @@ public:
       SetupBasicShader();
       }
 
-   inline ~Entity(){
+         inline ~Entity(){
          delete geometry;
          delete shader;
          delete transform;
       };
 
-   inline void Draw(){
-      shader->Bind();
-      shader->SetUniformf("time", Time::GetTime() / 10.0f);
-      shader->SetUniformMatrix4("translationMat", transform->GetTranslationMatrix());
-      shader->SetUniformMatrix4("rotationMat", transform->GetRotationMatrix());
-      shader->SetUniformMatrix4("scaleMat", transform->GetScaleMatrix());
+      inline void Draw(){
+         shader->Bind();
+         shader->SetUniformf("time", Time::GetTime() / 10.0f);
+         shader->SetUniformMatrix4("translationMat", transform->GetTranslationMatrix());
+         shader->SetUniformMatrix4("rotationMat", transform->GetRotationMatrix());
+         shader->SetUniformMatrix4("scaleMat", transform->GetScaleMatrix());
 
-      ((Model3D*)geometry)->Draw();
+         ((Model3D*)geometry)->Draw();
 
-      shader->Unbind();
-   }
+         shader->Unbind();
+      }
 };
 

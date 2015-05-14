@@ -3,10 +3,9 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <math.h>
-#include "Log.h"
-#include "Time.h"
-#include "RenderUtils.h"
-#include "Model3D.h"
+#include "../Utilities/Log.h"
+#include "../Utilities/Time.h"
+#include "../Utilities/RenderUtils.h"
 #include "Input.h"
 #include "Window.h"
 

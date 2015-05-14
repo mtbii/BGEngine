@@ -79,35 +79,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Cube.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="IOUtils.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GLSLProgram.h" />
-    <ClInclude Include="Log.h" />
+    <ClInclude Include="Core\Scene\Primitives\Cube.h" />
+    <ClInclude Include="Core\Scene\Entity.h" />
+    <ClInclude Include="Core\Input.h" />
+    <ClInclude Include="Utilities\IOUtils.h" />
+    <ClInclude Include="Core\Game.h" />
+    <ClInclude Include="Core\Scene\GL\GLSLProgram.h" />
+    <ClInclude Include="Utilities\Log.h" />
     <ClInclude Include="Main.h" />
-    <ClInclude Include="Model3D.h" />
-    <ClInclude Include="RenderUtils.h" />
-    <ClInclude Include="Time.h" />
-    <ClInclude Include="Transform.h" />
-    <ClInclude Include="Utilities.h" />
-    <ClInclude Include="Vertex.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="Core\Scene\GL\Model3D.h" />
+    <ClInclude Include="Utilities\RenderUtils.h" />
+    <ClInclude Include="Utilities\Time.h" />
+    <ClInclude Include="Core\Scene\Transform.h" />
+    <ClInclude Include="Utilities\Utilities.h" />
+    <ClInclude Include="Core\Scene\GL\Vertex.h" />
+    <ClInclude Include="Core\Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Cube.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="IOUtils.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GLSLProgram.cpp" />
-    <ClCompile Include="Log.cpp" />
+    <ClCompile Include="Core\Scene\Primitives\Cube.cpp" />
+    <ClCompile Include="Core\Input.cpp" />
+    <ClCompile Include="Utilities\IOUtils.cpp" />
+    <ClCompile Include="Core\Game.cpp" />
+    <ClCompile Include="Core\Scene\GL\GLSLProgram.cpp" />
+    <ClCompile Include="Utilities\Log.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Model3D.cpp" />
-    <ClCompile Include="RenderUtils.cpp" />
-    <ClCompile Include="Time.cpp" />
-    <ClCompile Include="Transform.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="Core\Scene\GL\Model3D.cpp" />
+    <ClCompile Include="Utilities\RenderUtils.cpp" />
+    <ClCompile Include="Utilities\Time.cpp" />
+    <ClCompile Include="Core\Scene\Transform.cpp" />
+    <ClCompile Include="Core\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="basic.frag" />

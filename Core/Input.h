@@ -2,7 +2,7 @@
 
 #include<SDL.h>
 #include<map>
-#include "Vertex.h"
+#include "Scene/GL/Vertex.h"
 
 class Input
 {
