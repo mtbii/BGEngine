@@ -1,8 +1,9 @@
 #include "Game.h"
 
-Game::Game(Window& window)
+Game::Game(Window& window, const int& targetFps)
 {
    this->window = window;
+   this->targetFps = targetFps;
 }
 
 Game::~Game()
@@ -24,7 +25,7 @@ int Game::Execute(){
    }
 
    int unprocessedTime = 0;
-   const int frameTime = (int)round(1000.0 / TARGET_FPS);
+   const int frameTime = (int)round(1000.0 / targetFps);
    bool mustRender = false;
    _isRunning = true;
    SDL_Event event;
@@ -46,16 +47,10 @@ int Game::Execute(){
       {
          Render();
          mustRender = false;
-
 #if DEBUG
          PrintFPS();
 #endif
       }
-      else
-      {
-         //SDL_Delay(1);
-      }
-
       unprocessedTime += Time::Delta();
    }
 
@@ -116,7 +111,7 @@ int Game::GetFPS(){
    {
       return 1000 / avgTime;
    }
-   return TARGET_FPS;
+   return targetFps;
 }
 
 void Game::PrintFPS(){

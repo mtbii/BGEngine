@@ -2,14 +2,15 @@
 #include "Core/Game.h"
 #include "Core/Scene/GL/Model3D.h"
 #include "Core/Scene/Entity.h"
+#include "Core/Scene/Primitives/Cube.h"
 
 class TestGame : public Game
 {
 private:
-   Entity<Model3D>* testEntity;
+   Cube* testCube;
 
 public:
-   TestGame(Window& window) : Game(window){};
+   TestGame(Window& window, const int& fps) : Game(window, fps){};
    virtual bool Init();
    virtual void Render();
    virtual void Update();

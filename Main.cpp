@@ -3,7 +3,7 @@
 void TestGame::Render(){
    Game::Render();
 
-   testEntity->Draw();
+   testCube->Draw();
 }
 
 bool TestGame::Init(){
@@ -42,21 +42,21 @@ bool TestGame::Init(){
    vertices.push_back(v2);
    vertices.push_back(v3);
 
-   Model3D* testMesh = new Model3D();
-   testMesh->Init();
-   testMesh->SetVertices(vertices);
 
    Transform* transform = new Transform(glm::vec3(0), glm::quat(glm::vec3(0.0f)), glm::vec3(1.0f));
 
-   testEntity = new Entity<Model3D>();
-   testEntity->geometry = testMesh;
-   testEntity->transform = transform;
+   testCube = new Cube(1, 1, 1);
+   testCube->transform = transform;
 
    return status;
 }
 
 void TestGame::Update(){
    Game::Update();
+   static int time = 0;
+   testCube->transform->SetScale(glm::vec3(sin(glm::radians((float)time++ / 4))));
+   testCube->transform->SetRotation(glm::vec3(0.1*tan(glm::radians((float)time++ / 4))));
+   testCube->transform->SetTranslation(glm::vec3(0.5f*cos(glm::radians((float)time++ / 4))));
 }
 
 void TestGame::OnEvent(SDL_Event* event)
@@ -72,12 +72,12 @@ void TestGame::OnEvent(SDL_Event* event)
 void TestGame::CleanUp()
 {
    Game::CleanUp();
-   delete testEntity;
+   delete testCube;
 }
 
 int main(int argc, char* argv[]){
    Window window("Test Game Engine", 600, 600);
-   TestGame game(window);
+   TestGame game(window, 60);
    int status = game.Execute();
    return status;
 }

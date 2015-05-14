@@ -10,10 +10,11 @@ public:
    Model3D();
    ~Model3D();
    void Init();
-   void SetVertices(std::vector<Vertex> vertices);
+   void SetVertices(std::vector<Vertex> vertices, std::vector<unsigned short> indices);
    void SetVertices(int count, float vertices[]);
    void Draw();
 
    GLuint vboId;
+   GLuint iboId;
    int size;
 };

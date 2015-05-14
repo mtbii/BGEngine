@@ -15,13 +15,13 @@ protected:
    bool _isRunning;
    Window window;
 
-   const int TARGET_FPS = 60;
+   int targetFps;
    int GetFPS();
    void PrintFPS();
    void RequestQuit();
 
 public:
-   Game(Window& window);
+   Game(Window& window, const int& fps);
    ~Game();
 
    virtual int Execute();
