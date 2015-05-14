@@ -3,7 +3,9 @@
 void TestGame::Render(){
    Game::Render();
 
-   testEntity->Draw();
+   //testEntity->Draw();
+
+   model.Draw();
 }
 
 bool TestGame::Init(){
@@ -45,13 +47,14 @@ bool TestGame::Init(){
    Model3D testMesh;
    testMesh.Init();
    testMesh.SetVertices(vertices);
+   model = testMesh;
 
-   Transform transform(glm::vec3(0.0f), glm::quat(glm::vec3(0.0f)), glm::vec3(1.0f));
+   //Transform transform(glm::vec3(0.0f), glm::quat(glm::vec3(0.0f)), glm::vec3(1.0f));
 
-   testEntity = new Entity<Model3D>();
+   /*testEntity = new Entity<Model3D>();
    testEntity->geometry = testMesh;
    testEntity->transform = transform;
-
+   */
    return status;
 }
 
@@ -64,20 +67,21 @@ void TestGame::OnEvent(SDL_Event* event)
 {
    Game::OnEvent(event);
 
-   if (Input::IsKeyDown(SDLK_ESCAPE))
-   {
-      RequestQuit();
-   }
+   //if (Input::IsKeyDown(SDLK_ESCAPE))
+   //{
+   //   RequestQuit();
+   //}
 }
 
 void TestGame::CleanUp()
 {
    Game::CleanUp();
-   delete testEntity;
+   //delete testEntity;
 }
 
 int main(int argc, char* argv[]){
-   TestGame game;
+   Window window("Test Game Engine", 800, 600);
+   TestGame game(window);
    int status = game.Execute();
    return status;
 }

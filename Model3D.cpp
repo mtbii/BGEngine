@@ -45,6 +45,6 @@ void Model3D::Draw(){
 
    glDrawArrays(GL_TRIANGLES, 0, size);
 
-   glDisableVertexAttribArray(1);
    glDisableVertexAttribArray(0);
+   glDisableVertexAttribArray(1);
 }

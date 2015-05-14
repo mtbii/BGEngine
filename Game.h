@@ -7,19 +7,14 @@
 #include "Time.h"
 #include "RenderUtils.h"
 #include "Model3D.h"
-#include "Input.h"
+//#include "Input.h"
+#include "Window.h"
 
 class Game
 {
 protected:
    bool _isRunning;
-
-   string _title;
-   int _width;
-   int _height;
-
-   SDL_Window* _window;
-   SDL_GLContext _glContext;
+   Window window;
 
    const int TARGET_FPS = 60;
    int GetFPS();
@@ -27,8 +22,7 @@ protected:
    void RequestQuit();
 
 public:
-   Game();
-   Game(string windowTitle, int width, int height);
+   Game(Window& window);
    ~Game();
 
    virtual int Execute();
