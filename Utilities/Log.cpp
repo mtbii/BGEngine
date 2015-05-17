@@ -1,4 +1,5 @@
 #include "Log.h"
+using namespace std;
 
 void fatal(const char* msg, ...){
    stringstream sstream;

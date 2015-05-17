@@ -1,5 +1,5 @@
 #include "GLSLProgram.h"
-
+using namespace std;
 
 GLSLProgram::GLSLProgram() :
 programId(0),

@@ -1,62 +1,63 @@
 #include "Main.h"
+using namespace std;
 
 void TestGame::Render(){
    Game::Render();
 
-   testCube->Draw();
+   scene->Draw();
 }
 
 bool TestGame::Init(){
    bool status = Game::Init();
 
-   vector<Vertex> vertices;
+   PerspectiveCamera* camera = new PerspectiveCamera(CameraControlType::ArcBall, glm::radians(45.0f), (float)this->window.width / (float)this->window.height, 1.0f, 200.0f);
+   camera->position = glm::vec3(10.0f);
+   scene = new Scene(camera);
 
-   Vertex v1;
-   v1.position.x = 0;
-   v1.position.y = 0.5f;
-   v1.position.z = 0;
-   v1.color.a = 255;
-   v1.color.r = 255;
-   v1.color.g = 0;
-   v1.color.b = 0;
+   SceneObject* box = new Shapes::Sphere(2.0f);
+   SceneObject* box2 = new Shapes::Sphere(1.0f);
+   box2->transform->SetTranslation(glm::vec3(3.0, 0.0, 0.0));
+   box->AddChild(box2);
 
-   Vertex v2;
-   v2.position.x = 0.5f;
-   v2.position.y = -0.5f;
-   v2.position.z = 0.0f;
-   v2.color.a = 255;
-   v2.color.r = 0;
-   v2.color.g = 255;
-   v2.color.b = 0;
+   scene->AddSceneObject(box);
 
-   Vertex v3;
-   v3.position.x = -0.5f;
-   v3.position.y = -0.5f;
-   v3.position.z = 0.0f;
-   v3.color.a = 255;
-   v3.color.r = 0;
-   v3.color.g = 0;
-   v3.color.b = 255;
+   ////Load a model and position/rotate/scale it properly
+   //Transform* transform = new Transform(glm::vec3(6.0f), glm::quat(glm::vec3(0.0f)), glm::vec3(0.2f));
+   //vector<Model3D*> model = ModelUtils::LoadModel("Core/Scene/Primitives/obj/cube.obj");
 
-   vertices.push_back(v1);
-   vertices.push_back(v2);
-   vertices.push_back(v3);
+   //Entity<Model3D>* entity = new Entity<Model3D>(model, *transform);
+   //entities.push_back(entity);
 
+   ////Load a model and position/rotate/scale it properly
+   //transform = new Transform(glm::vec3(0.0f), glm::quat(glm::vec3(0.0f)), glm::vec3(0.2f));
+   //model = ModelUtils::LoadModel("Core/Scene/Primitives/obj/sphere.obj");
 
-   Transform* transform = new Transform(glm::vec3(0), glm::quat(glm::vec3(0.0f)), glm::vec3(1.0f));
+   //entity = new Entity<Model3D>(model, *transform);
+   //entities.push_back(entity);
 
-   testCube = new Cube(1, 1, 1);
-   testCube->transform = transform;
+   //projectionMatrix = glm::perspective(glm::radians(45.0f), (float)this->window.width / (float)this->window.height, 1.0f, 200.0f);
+   //viewMatrix = glm::lookAt(glm::vec3(10.0f), glm::vec3(0), glm::vec3(0, 1.0f, 0));
 
    return status;
 }
 
 void TestGame::Update(){
    Game::Update();
-   static int time = 0;
-   testCube->transform->SetScale(glm::vec3(sin(glm::radians((float)time++ / 4))));
-   testCube->transform->SetRotation(glm::vec3(0.1*tan(glm::radians((float)time++ / 4))));
-   testCube->transform->SetTranslation(glm::vec3(0.5f*cos(glm::radians((float)time++ / 4))));
+
+   scene->Update();
+
+   for (unsigned int i = 0; i < scene->sceneObjects.size(); i++)
+   {
+      SceneObject* sceneObj = scene->sceneObjects[i];
+      sceneObj->transform->SetRotation(sceneObj->transform->GetRotation() * glm::quat(glm::vec3(0.0, 0.01f, 0.0)));
+
+      auto children = sceneObj->children;
+      for (unsigned int j = 0; j < children.size(); j++)
+      {
+         auto childObj = children[j];
+         childObj->transform->SetRotation(childObj->transform->GetRotation() * glm::quat(glm::vec3(0.0, 0.1f, 0.0)));
+      }
+   }
 }
 
 void TestGame::OnEvent(SDL_Event* event)
@@ -72,11 +73,12 @@ void TestGame::OnEvent(SDL_Event* event)
 void TestGame::CleanUp()
 {
    Game::CleanUp();
-   delete testCube;
+
+   delete scene;
 }
 
 int main(int argc, char* argv[]){
-   Window window("Test Game Engine", 600, 600);
+   Window window("Test Game Engine", 800, 600);
    TestGame game(window, 60);
    int status = game.Execute();
    return status;

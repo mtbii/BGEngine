@@ -1,13 +1,16 @@
 #pragma once
 #include "Core/Game.h"
 #include "Core/Scene/GL/Model3D.h"
-#include "Core/Scene/Entity.h"
-#include "Core/Scene/Primitives/Cube.h"
+#include "Core/Scene/Graph/Entity.h"
+#include "Core/ModelUtils.h"
+#include "Core/Scene/Graph/Scene.h"
+#include "Core/Scene/Graph/Camera/PerspectiveCamera.h"
+#include "Core/Scene/Graph/Primitives/Shapes.h"
 
 class TestGame : public Game
 {
 private:
-   Cube* testCube;
+   Scene* scene;
 
 public:
    TestGame(Window& window, const int& fps) : Game(window, fps){};

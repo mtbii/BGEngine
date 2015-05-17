@@ -2,15 +2,11 @@
 
 
 Transform::Transform() :
-translation(0),
-rotation(0, 0, 0, 1),
-scale(1),
-translationMatrix(0),
-rotationMatrix(0),
-scaleMatrix(1),
-transformMatrix(1.0f),
-dirtyTransformMatrix(false)
+dirtyTransformMatrix(true)
 {
+   SetTranslation(glm::vec3(0.0f));
+   SetRotation(glm::vec3(0.0f));
+   SetScale(glm::vec3(1.0f));
 }
 
 Transform::Transform(const glm::vec3& trans, const glm::quat& rot, const glm::vec3& scale) :
@@ -122,7 +118,7 @@ glm::mat4 Transform::GetTransformMatrix()
 {
    if (dirtyTransformMatrix)
    {
-      transformMatrix = GetScaleMatrix()*GetRotationMatrix()*GetTranslationMatrix();
+      transformMatrix = GetTranslationMatrix()*GetRotationMatrix()* GetScaleMatrix();
       dirtyTransformMatrix = false;
    }
    return transformMatrix;

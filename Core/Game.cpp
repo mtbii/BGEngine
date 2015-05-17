@@ -1,4 +1,5 @@
 #include "Game.h"
+using namespace std;
 
 Game::Game(Window& window, const int& targetFps)
 {

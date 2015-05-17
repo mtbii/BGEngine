@@ -36,6 +36,30 @@ struct Color{
       a = _a;
    }
 
+   Color(int _r, int _g, int _b, int _a)
+   {
+      r = _r;
+      g = _g;
+      b = _b;
+      a = _a;
+   }
+
+   Color(double _r, double _g, double _b, double _a)
+   {
+      r = (GLubyte)(255 * _r);
+      g = (GLubyte)(255 * _g);
+      b = (GLubyte)(255 * _b);
+      a = (GLubyte)(255 * _a);
+   }
+
+   Color(float _r, float _g, float _b, float _a)
+   {
+      r = (GLubyte)(255 * _r);
+      g = (GLubyte)(255 * _g);
+      b = (GLubyte)(255 * _b);
+      a = (GLubyte)(255 * _a);
+   }
+
    GLubyte r;
    GLubyte g;
    GLubyte b;

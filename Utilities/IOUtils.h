@@ -8,6 +8,7 @@
 #include <locale>
 #include <fstream>
 #include <iostream>
+#include "Log.h"
 
 class FileUtils
 {

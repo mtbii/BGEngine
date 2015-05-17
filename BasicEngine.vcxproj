@@ -39,8 +39,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>C:\Projects\Games\Dependencies\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Projects\Games\Dependencies\glm;C:\Projects\Games\Dependencies\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Projects\Games\Dependencies\assimp-3.1.1-win-binaries\lib32;C:\Projects\Games\Dependencies\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Projects\Games\Dependencies\assimp-3.1.1\include;C:\Projects\Games\Dependencies\glm;C:\Projects\Games\Dependencies\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)..\$(Configuration)\</OutDir>
     <IntDir>..\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -53,14 +53,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Projects\Games\Dependencies\SDL2-2.0.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\Projects\Games\Dependencies\SDL2-2.0.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glu32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glu32.lib;glew32.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -81,9 +81,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Core\Scene\Primitives\Cube.h" />
-    <ClInclude Include="Core\Scene\Entity.h" />
+    <ClInclude Include="Core\Scene\Graph\Camera\Camera.h" />
+    <ClInclude Include="Core\Scene\Graph\Camera\OrthographicCamera.h" />
+    <ClInclude Include="Core\Scene\Graph\Camera\PerspectiveCamera.h" />
+    <ClInclude Include="Core\Scene\Graph\Entity.h" />
     <ClInclude Include="Core\Input.h" />
+    <ClInclude Include="Core\ModelUtils.h" />
+    <ClInclude Include="Core\Scene\Graph\Primitives\Shapes.h" />
+    <ClInclude Include="Core\Scene\Graph\Scene.h" />
+    <ClInclude Include="Core\Scene\Graph\SceneObject.h" />
     <ClInclude Include="Utilities\IOUtils.h" />
     <ClInclude Include="Core\Game.h" />
     <ClInclude Include="Core\Scene\GL\GLSLProgram.h" />
@@ -92,14 +98,20 @@
     <ClInclude Include="Core\Scene\GL\Model3D.h" />
     <ClInclude Include="Utilities\RenderUtils.h" />
     <ClInclude Include="Utilities\Time.h" />
-    <ClInclude Include="Core\Scene\Transform.h" />
+    <ClInclude Include="Core\Scene\Graph\Transform.h" />
     <ClInclude Include="Utilities\Utilities.h" />
     <ClInclude Include="Core\Scene\GL\Vertex.h" />
     <ClInclude Include="Core\Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Core\Scene\Primitives\Cube.cpp" />
     <ClCompile Include="Core\Input.cpp" />
+    <ClCompile Include="Core\ModelUtils.cpp" />
+    <ClCompile Include="Core\Scene\Graph\Camera\CameraControl.cpp" />
+    <ClCompile Include="Core\Scene\Graph\Camera\OrthographicCamera.cpp" />
+    <ClCompile Include="Core\Scene\Graph\Camera\PerspectiveCamera.cpp" />
+    <ClCompile Include="Core\Scene\Graph\Entity.cpp" />
+    <ClCompile Include="Core\Scene\Graph\Primitives\Shapes.cpp" />
+    <ClCompile Include="Core\Scene\Graph\Scene.cpp" />
     <ClCompile Include="Utilities\IOUtils.cpp" />
     <ClCompile Include="Core\Game.cpp" />
     <ClCompile Include="Core\Scene\GL\GLSLProgram.cpp" />
@@ -108,12 +120,34 @@
     <ClCompile Include="Core\Scene\GL\Model3D.cpp" />
     <ClCompile Include="Utilities\RenderUtils.cpp" />
     <ClCompile Include="Utilities\Time.cpp" />
-    <ClCompile Include="Core\Scene\Transform.cpp" />
+    <ClCompile Include="Core\Scene\Graph\Transform.cpp" />
     <ClCompile Include="Core\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="basic.frag" />
-    <None Include="basic.vert" />
+    <None Include="basic.frag">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="basic.vert">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Core\Scene\Graph\Primitives\obj\cube.obj">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Resource>
+    <Resource Include="Core\Scene\Graph\Primitives\obj\cylinder.obj">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Resource>
+    <Resource Include="Core\Scene\Graph\Primitives\obj\monkey.obj">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Resource>
+    <Resource Include="Core\Scene\Graph\Primitives\obj\sphere.obj">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Resource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
