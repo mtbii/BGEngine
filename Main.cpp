@@ -14,29 +14,34 @@ bool TestGame::Init(){
    camera->position = glm::vec3(10.0f);
    scene = new Scene(camera);
 
-   SceneObject* box = new Shapes::Sphere(2.0f);
-   SceneObject* box2 = new Shapes::Sphere(1.0f);
-   box2->transform->SetTranslation(glm::vec3(3.0, 0.0, 0.0));
-   box->AddChild(box2);
+   //SceneObject* box = new Shapes::Sphere(2.0f);
+   //box->material = new ColoredMaterial(Color(.4f, 1.0f, 0.2f, 1.0f), Color(1.0f, 1.0f, 1.0f, 1.0f), Color(1.0f, 1.0f, 1.0f, 1.0f), 1.0);
+   //
+   //SceneObject* box2 = new Shapes::Sphere(1.0f);
+   //box2->material = new ColoredMaterial(Color(0.1f, 0.1f, 0.1f, 1.0f), Color(1.0f, 1.0f, 1.0f, 1.0f), Color(1.0f, 1.0f, 1.0f, 1.0f), 1.0);
+   //box2->transform->SetTranslation(glm::vec3(5.0, 0.0, 0.0));
+   //box->AddChild(box2);
 
-   scene->AddSceneObject(box);
+   //scene->AddSceneObject(box);
 
-   ////Load a model and position/rotate/scale it properly
-   //Transform* transform = new Transform(glm::vec3(6.0f), glm::quat(glm::vec3(0.0f)), glm::vec3(0.2f));
-   //vector<Model3D*> model = ModelUtils::LoadModel("Core/Scene/Primitives/obj/cube.obj");
+   vector<Vertex> vertices;
+   vertices.push_back(Vertex(Position(1.0, 0.0, 1.0), TextureCoordinate(1.0, 1.0)));
+   vertices.push_back(Vertex(Position(1.0, 0.0, -1.0), TextureCoordinate(1.0, 0.0)));
+   vertices.push_back(Vertex(Position(-1.0, 0.0, -1.0), TextureCoordinate(0.0, 0.0)));
+   vertices.push_back(Vertex(Position(-1.0, 0.0, 1.0), TextureCoordinate(0.0, 1.0)));
 
-   //Entity<Model3D>* entity = new Entity<Model3D>(model, *transform);
-   //entities.push_back(entity);
+   vector<unsigned short> indices;
+   indices.push_back(0); indices.push_back(1); indices.push_back(2);
+   indices.push_back(2); indices.push_back(3); indices.push_back(0);
 
-   ////Load a model and position/rotate/scale it properly
-   //transform = new Transform(glm::vec3(0.0f), glm::quat(glm::vec3(0.0f)), glm::vec3(0.2f));
-   //model = ModelUtils::LoadModel("Core/Scene/Primitives/obj/sphere.obj");
+   Model3D* model3D = new Model3D();
+   model3D->Init(vertices, indices);
+   Entity* entity = new Entity(*model3D);
+   entity->transform->SetScale(glm::vec3(10, 10, 10));
+   //entity->material = new ColoredMaterial(Color(0.1f, 0.1f, 0.1f, 1.0f), Color(1.0f, 1.0f, 1.0f, 1.0f), Color(1.0f, 1.0f, 1.0f, 1.0f), 1.0);
+   entity->material = new TexturedMaterial("sample_pic.jpg");
 
-   //entity = new Entity<Model3D>(model, *transform);
-   //entities.push_back(entity);
-
-   //projectionMatrix = glm::perspective(glm::radians(45.0f), (float)this->window.width / (float)this->window.height, 1.0f, 200.0f);
-   //viewMatrix = glm::lookAt(glm::vec3(10.0f), glm::vec3(0), glm::vec3(0, 1.0f, 0));
+   scene->AddSceneObject(entity);
 
    return status;
 }

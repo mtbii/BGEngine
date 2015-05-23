@@ -26,6 +26,18 @@ struct Position{
    float z;
 };
 
+struct TextureCoordinate{
+   TextureCoordinate() : u(0), v(0){};
+   TextureCoordinate(float _u, float _v)
+   {
+      u = _u;
+      v = _v;
+   }
+
+   float u;
+   float v;
+};
+
 struct Color{
    Color() : r(0), g(0), b(0), a(0){};
    Color(GLubyte _r, GLubyte _g, GLubyte _b, GLubyte _a)
@@ -68,15 +80,17 @@ struct Color{
 
 struct Vertex{
    Vertex(){};
-   Vertex(Position pos, Color col)
+   Vertex(Position pos, TextureCoordinate texCoord)
    {
       position = pos;
-      color = col;
+      this->texCoord = texCoord;
+      //color = col;
    }
 
    Position position;
-   Color color;
+   //Color color;
+   TextureCoordinate texCoord;
 
    static const int POSITION_SIZE = 3;
-   static const int COLOR_SIZE = 4;
+   static const int TEX_COORD_SIZE = 2;
 };

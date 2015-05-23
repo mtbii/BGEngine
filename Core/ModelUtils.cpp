@@ -23,14 +23,27 @@ std::vector<Model3D*> ModelUtils::LoadModel(const std::string& filePath)
       {
          for (unsigned int i = 0; i < mesh->mNumVertices; i++)
          {
-            aiVector3D v = mesh->mVertices[i];
-            aiColor4D c = aiColor4D((float)rand() / RAND_MAX, (float)rand() / RAND_MAX, (float)rand() / RAND_MAX, 1.0f);
-            if (mesh->HasVertexColors(i))
+            aiVector3D* u = nullptr;
+            if (mesh->HasTextureCoords(i))
             {
-               c = *mesh->mColors[i];
+               aiVector3D* u = mesh->mTextureCoords[i];
             }
 
-            vertices.push_back(Vertex(Position(v.x, v.y, v.z), Color(c.r, c.g, c.b, c.a)));
+            aiVector3D v = mesh->mVertices[i];
+            //aiColor4D c = aiColor4D((float)rand() / RAND_MAX, (float)rand() / RAND_MAX, (float)rand() / RAND_MAX, 1.0f);
+            //if (mesh->HasVertexColors(i))
+            //{
+            //   c = *mesh->mColors[i];
+            //}
+
+            if (u != nullptr)
+            {
+               vertices.push_back(Vertex(Position(v.x, v.y, v.z), TextureCoordinate(u->x, u->y)));
+            }
+            else
+            {
+               vertices.push_back(Vertex(Position(v.x, v.y, v.z), TextureCoordinate(0, 0)));
+            }
          }
       }
       if (mesh->HasFaces())
@@ -45,8 +58,7 @@ std::vector<Model3D*> ModelUtils::LoadModel(const std::string& filePath)
          }
       }
 
-      model->Init();
-      model->SetVertices(vertices, indices);
+      model->Init(vertices, indices);
       models.push_back(model);
    }
    return models;

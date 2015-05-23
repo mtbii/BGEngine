@@ -3,6 +3,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include "Transform.h"
+#include "../Material/Material.h"
 #include "Camera/Camera.h"
 
 class SceneObject
@@ -10,9 +11,14 @@ class SceneObject
 public:
    SceneObject* parent;
    Transform* transform;
+   Material* material;
    std::vector<SceneObject*> children;
 
    inline ~SceneObject(){
+      delete parent;
+      delete transform;
+      delete material;
+
       for (unsigned int i = 0; i < children.size(); i++)
       {
          delete children[i];
@@ -57,7 +63,7 @@ public:
    }
 
    inline virtual SceneObject* GetParent(){ return parent; }
-   inline virtual glm::mat4 GetTransformMatrix(){ return this->transform->GetTransformMatrix(); }
+   inline virtual glm::mat4 GetTransformMatrix(){ return (parent ? parent->GetTransformMatrix() : glm::mat4(1.0f))*this->transform->GetTransformMatrix(); }
 
    inline virtual std::vector<SceneObject*> GetChildren(){ return children; }
 };

@@ -136,6 +136,24 @@ void GLSLProgram::SetUniform3f(const std::string& uniformName, const glm::vec3& 
    }
 }
 
+void GLSLProgram::SetUniform4f(const std::string& uniformName, const glm::vec4& value)
+{
+   map<std::string, int>::iterator itemIter = uniforms.find(uniformName);
+   if (itemIter != uniforms.end())
+   {
+      glUniform4f(itemIter->second, value.x, value.y, value.z, value.w);
+   }
+}
+
+void GLSLProgram::SetUniformColor(const std::string& uniformName, const Color& value)
+{
+   map<std::string, int>::iterator itemIter = uniforms.find(uniformName);
+   if (itemIter != uniforms.end())
+   {
+      glUniform4f(itemIter->second, value.r / 255.0f, value.g / 255.0f, value.b / 255.0f, value.a / 255.0f);
+   }
+}
+
 void GLSLProgram::SetUniformMatrix4(const std::string& uniformName, const glm::mat4& value)
 {
    map<std::string, int>::iterator itemIter = uniforms.find(uniformName);

@@ -6,6 +6,7 @@
 #include "Core/Scene/Graph/Scene.h"
 #include "Core/Scene/Graph/Camera/PerspectiveCamera.h"
 #include "Core/Scene/Graph/Primitives/Shapes.h"
+#include "Core/Scene/Material/Material.h"
 
 class TestGame : public Game
 {

@@ -6,6 +6,7 @@
 #include <vector>
 #include <map>
 #include <glm/glm.hpp>
+#include "Vertex.h"
 #include "../../../Utilities/Log.h"
 #include "../../../Utilities/IOUtils.h"
 
@@ -23,6 +24,8 @@ public:
    void GLSLProgram::SetUniformi(const std::string& uniformName, int value);
    void GLSLProgram::SetUniformf(const std::string& uniformName, float value);
    void GLSLProgram::SetUniform3f(const std::string& uniformName, const glm::vec3& value);
+   void GLSLProgram::SetUniform4f(const std::string& uniformName, const glm::vec4& value);
+   void GLSLProgram::SetUniformColor(const std::string& uniformName, const Color& value);
    void GLSLProgram::SetUniformMatrix4(const std::string& uniformName, const glm::mat4& value);
 
    void Bind();

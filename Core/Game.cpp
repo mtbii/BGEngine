@@ -17,6 +17,9 @@ bool Game::Init(){
    {
       return false;
    }
+
+   ilInit();
+
    return true;
 }
 

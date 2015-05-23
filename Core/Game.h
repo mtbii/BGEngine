@@ -6,6 +6,8 @@
 #include "../Utilities/Log.h"
 #include "../Utilities/Time.h"
 #include "../Utilities/RenderUtils.h"
+#include <IL/il.h>
+#include <IL/ilut.h>
 #include "Input.h"
 #include "Window.h"
 

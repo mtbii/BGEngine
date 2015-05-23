@@ -76,6 +76,8 @@
     <ClInclude Include="Core\ModelUtils.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Scene\Material\Material.h" />
+    <ClInclude Include="Core\Scene\GL\Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -127,16 +129,26 @@
     <ClCompile Include="Core\ModelUtils.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Scene\Graph\Entity.cpp" />
+    <ClCompile Include="Core\Scene\Graph\Entity.cpp">
+      <Filter>Core\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Scene\Material\TexturedMaterial.cpp" />
+    <ClCompile Include="Core\Scene\Material\ColoredMaterial.cpp" />
+    <ClCompile Include="Core\Scene\GL\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="basic.vert" />
-    <None Include="basic.frag" />
+    <None Include="Core\Scene\GL\Shaders\basic.frag" />
+    <None Include="Core\Scene\GL\Shaders\basic.vert" />
+    <None Include="Core\Scene\GL\Shaders\texture.frag" />
+    <None Include="Core\Scene\GL\Shaders\texture.vert" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Core\Scene\Graph\Primitives\obj\cube.obj" />
     <Resource Include="Core\Scene\Graph\Primitives\obj\cylinder.obj" />
     <Resource Include="Core\Scene\Graph\Primitives\obj\monkey.obj" />
     <Resource Include="Core\Scene\Graph\Primitives\obj\sphere.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="sample_pic.jpg" />
   </ItemGroup>
 </Project>

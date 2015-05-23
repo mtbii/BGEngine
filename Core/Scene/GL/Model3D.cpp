@@ -11,12 +11,14 @@ Model3D::~Model3D(){
    glDeleteBuffers(1, &iboId);
 }
 
-void Model3D::Init(){
+void Model3D::Init(std::vector<Vertex> vertices, std::vector<unsigned short> indices){
    if (vboId == 0)
    {
       glGenBuffers(1, &vboId);
       glGenBuffers(1, &iboId);
    }
+
+   SetVertices(vertices, indices);
 }
 
 void Model3D::SetVertices(std::vector<Vertex> vertices, std::vector<unsigned short> indices){
@@ -43,6 +45,8 @@ void Model3D::Draw(){
 
    glEnableVertexAttribArray(0);
    glEnableVertexAttribArray(1);
+   //glEnableVertexAttribArray(2);
+
    glBindBuffer(GL_ARRAY_BUFFER, vboId);
    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
 
@@ -50,7 +54,10 @@ void Model3D::Draw(){
    glVertexAttribPointer(0, Vertex::POSITION_SIZE, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
 
    //Color attribute pointer
-   glVertexAttribPointer(1, Vertex::COLOR_SIZE, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+   //glVertexAttribPointer(1, Vertex::COLOR_SIZE, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+
+   //Texture coordinate attribute pointer
+   glVertexAttribPointer(1, Vertex::TEX_COORD_SIZE, GL_FLOAT, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, texCoord));
 
    glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_SHORT, (void*)0);
 
