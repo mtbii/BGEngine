@@ -13,15 +13,15 @@ uniforms()
 
 GLSLProgram::~GLSLProgram()
 {
-   if (vertexShaderId == 0)
+   if (vertexShaderId != 0)
    {
       glDeleteShader(vertexShaderId);
    }
-   if (fragmentShaderId == 0)
+   if (fragmentShaderId != 0)
    {
       glDeleteShader(fragmentShaderId);
    }
-   if (programId == 0)
+   if (programId != 0)
    {
       glDeleteProgram(programId);
    }
